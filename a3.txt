@@ -1,0 +1,295 @@
+Script started on 2022-10-06 13:07:22-04:00
+bash: /home/amirali/.bashrc: line 12: unexpected EOF while looking for matching `"'
+bash: /home/amirali/.bashrc: line 20: syntax error: unexpected end of file
+bash-4.4$ grep "replied_to" downloaded_tweets_extend_original_nolf2_NOBOT.tsv | cut -f 2,6  | sort -k  2 -n | awk ' { t = $1; $1 = $2; $2 = t; print; } '> sub_set_graph.tsv
+bash-4.4$ head sub_set_graph.tsv
+3832 1412897313907900420
+3832 246667561
+465973 2295967047
+612473 267377062
+612473 267377062
+621533 2147604445
+807095 73452506
+1294741 5026541
+1652541 1388928926869753857
+1917731 826226272418283520
+bash-4.4$ exit
+
+Script done on 2022-10-06 13:07:35-04:00
+This is the command I used to obtain a bi-directional graph of the user who got the reply and the user who
+replied on the right hand side. The full bidirectional graph will be found at Q1.txt. 
+Throughout this assignment the dataset used as been filtered by bots and there are not bots in this dataset 
+using the command professor provided for the previous assignment. 
+
+
+**************************************************************************************************************************
+
+2. 
+Script started on 2022-10-07 17:33:03-04:00
+bash: /home/amirali/.bashrc: line 12: unexpected EOF while looking for matching `"'
+bash: /home/amirali/.bashrc: line 20: syntax error: unexpected end of file
+bash-4.4$ grep "replied_to" downloaded_tweets_extend_original_nolf2_NOBOT.tsv | cut -f 2,6  | sort -k 2 -n | awk ' { t = $1; $1 = $2; $2 = t; print; } '> sub_set_graph.ttsv
+bash-4.4$ awk '{print $1}' sub_set_graph.tsv| sort | uniq -c | sort -nr | awk '{ if ($1 >= 3) {print} }'
+     45 3453306553
+     27 29447428
+     14 1238370241169616897
+     13 1108565574
+     12 19739126
+     11 21525682
+     10 95091601
+     10 48624704
+     10 1462548977367359490
+      9 26217297
+      9 18831926
+      9 1120633726478823425
+      8 938494109844729856
+      8 2809959174
+      8 2615581908
+      8 1387010761994682371
+      8 1268223690480615424
+      7 878284831
+      7 15801906
+      6 926164634570067968
+      6 467726691
+      6 45379403
+      6 32871086
+      6 2885493519
+      6 262219168
+      6 1280478731874848769
+      6 1238583088998830081
+      5 92932981
+      5 86626845
+      5 2768501
+      5 254515782
+      5 139109800
+      5 1237314642583658496
+      5 1098819491780153345
+      4 870629200348274688
+      4 76842602
+      4 711608180535640064
+      4 66917778
+      4 65357102
+      4 63942152
+      4 605153786
+      4 490002009
+      4 342863309
+      4 34116377
+      4 3303457302
+      4 3246790436
+      4 2608740770
+      4 255812611
+      4 2227646515
+      4 22187085
+      4 178580925
+      4 1471037967926018051
+      4 14247236
+      4 1335983975613939712
+      4 1238949674989416449
+      4 1117704370630455296
+      4 1096205507348623360
+      4 1080844782
+      4 1005846500583321601
+      3 977204844
+      3 9609622
+      3 950563187296030721
+      3 93880122
+      3 879147821915615233
+      3 843433646962999296
+      3 798953701972938752
+      3 795857631571156992
+      3 793331593
+      3 7587032
+      3 728273994
+      3 722242009
+      3 713752653289955329
+      3 707967655031005186
+      3 58974496
+      3 41438148
+      3 4118285112
+      3 368240745
+      3 35787166
+      3 34247411
+      3 3383159573
+      3 3288075858
+      3 3131144855
+      3 30844417
+      3 307755781
+      3 288277167
+      3 27493883
+      3 255369151
+      3 234694571
+      3 225779417
+      3 20995648
+      3 20559705
+      3 20052899
+      3 19084896
+      3 163018653
+      3 159021888
+      3 15480566
+      3 14707794
+      3 1460176204363972613
+      3 145499533
+      3 14281853
+      3 1421835080813666306
+      3 14157134
+      3 1330859882040463362
+      3 1319916075476262914
+      3 1247612029
+      3 1218721688738615297
+      3 1189799454506799104
+      3 1113341312
+      3 1095523459877068800
+      3 1094971056358637568
+      3 1073606435580325889
+      3 1031000589054828544
+bash-4.4$ awk '{print $1}' sub_set_graph.tsv| sort | uniq -c | sort -nr | awk '{ if ($1 >= 3) {print} }' > Q2.txt
+bash-4.4$ exit
+
+Script done on 2022-10-07 17:34:18-04:00
+
+*********************************************************************************************************************
+
+
+reset
+n=100 #number of intervals
+max=100. #max value
+min=0 #min value
+width=(max-min)/n #interval width
+hist(x,width)=width*floor(x/width)+width/2.0
+set terminal svg 
+set output "gnu.svg"
+set xrange [min:max]
+set yrange [0:]
+#to put an empty boundary around the
+#data inside an autoscaled graph.
+set offset graph 0.05,0.05,0.05,0.0
+set xtics min,(max-min)/5,max
+set boxwidth width*0.9
+set style fill solid 0.5 #fillstyle
+set tics out nomirror
+set xlabel "users"
+set ylabel "Frequency"
+plot "histogram.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" notitle
+
+These are the commands I used to plot the histogram. I used the script provided
+by the professor in stack exchange. 
+Script started on 2022-10-06 17:34:48-04:00
+bash: /home/amirali/.bashrc: line 12: unexpected EOF while looking for matching `"'
+bash: /home/amirali/.bashrc: line 20: syntax error: unexpected end of file
+bash-4.4$ grep "replied_to" downloaded_tweets_extend_original_nolf2_NOBOT.tsv | cut -f 4,6  | awk ' { t = $1; $1 = $2; $2 = t; print; }'   > hashtags.tsv
+bash-4.4$ awk '{print $2}' hashtags.tsv |tr "," "\n"  | tr [:upper:] [:lower:]| tr -d ' ' | tr -d '\"' |tr -d '"\'|  sort | uniq -c | sort -nr | head -n 30
+tr: warning: an unescaped backslash at end of string is not portable
+    166 auspol
+     77 longcovid
+     60 covid19
+     47 alboforpm
+     44 ukraine
+     32 standwithukraine
+     31 covid
+     29 johnsonout
+     24 covidisnotover
+     20 ableg
+     19 russia
+     18 lnpcorruptionparty
+     18 ausvotes
+     17 bccrss
+     16 partygate
+     15 votefordout2022
+     15 istandwithukraine
+     15 covidisairborne
+     14 scottythepathologicalliar
+     14 insiders
+     14 brexit
+     13 votethemallout2022
+     13 omicron
+     13 cdnpoli
+     12 nevervoteconservative
+     12 gutlessscomo
+     12 demvoice1
+     12 ausvotes2022
+     11 wearamask
+     11 stupidtrump
+bash-4.4$ exit
+
+Script done on 2022-10-06 17:35:22-04:00
+These are the most common hashtags found in replied_to tweets. For Q4 used the tweets that were replies to others in order to compute the 
+hashtag frequency because the referenced IDs for replied_to tweets were not found in the file. These are the hashtags found in this 
+most common cluster used in the questions above. If we were to print the first column of the hashtags.tsv file then we would get the same 
+results as the second question of this assignment. 
+
+
+Now to compare these hashtags with the most common hastags of the whole dataset there are several differences. #longcovid is a very popular hashtag used in 
+both clusters. #ukrain is used less in this cluster. a diff command wil be ran to compare the major differences below. As you can see below , using 
+the diff command there are no common amount of hashtags, however, there are relatively similar hashtags throughout the file. 
+  
+
+Script started on 2022-10-07 14:22:27-04:00
+bash: /home/amirali/.bashrc: line 12: unexpected EOF while looking for matching `"'
+bash: /home/amirali/.bashrc: line 20: syntax error: unexpected end of file
+bash-4.4$ diff -u commonhashtags.tsv clusterhashtags.tsv 
+--- commonhashtags.tsv	2022-10-07 14:17:58.200020243 -0400
++++ clusterhashtags.tsv	2022-10-07 14:18:33.150157710 -0400
+@@ -1,30 +1,30 @@
+-   2910 ukraine
+-   1935 covid19
+-   1317 longcovid
+-   1140 russia
+-    897 followbackfriday
+-    895 fbpe
+-    794 standwithukraine
+-    536 putinhitler
+-    491 russian
+-    480 omicron
+-    450 covid
+-    429 breaking
+-    426 putin
+-    384 auspol
+-    384 ableg
+-    359 mariupol
+-    351 kyiv
+-    345 bcpoli
+-    340 covidisairborne
+-    308 stopputinnow
+-    302 pmqs
+-    295 partygate
+-    285 genocide
+-    280 เจ้าแก้มก้อน
+-    274 putinwarcriminal
+-    273 ottawa
+-    263 russiasanctions
+-    260 ukrainian
+-    260 cdnpoli
+-    260 boycottrussia
++    166 auspol
++     77 longcovid
++     60 covid19
++     47 alboforpm
++     44 ukraine
++     32 standwithukraine
++     31 covid
++     29 johnsonout
++     24 covidisnotover
++     20 ableg
++     19 russia
++     18 lnpcorruptionparty
++     18 ausvotes
++     17 bccrss
++     16 partygate
++     15 votefordout2022
++     15 istandwithukraine
++     15 covidisairborne
++     14 scottythepathologicalliar
++     14 insiders
++     14 brexit
++     13 votethemallout2022
++     13 omicron
++     13 cdnpoli
++     12 nevervoteconservative
++     12 gutlessscomo
++     12 demvoice1
++     12 ausvotes2022
++     11 wearamask
++     11 stupidtrump
+bash-4.4$ ^D[Kexit
+
+Script done on 2022-10-07 14:23:02-04:00
