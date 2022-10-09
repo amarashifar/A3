@@ -1,7 +1,7 @@
 Script started on 2022-10-06 13:07:22-04:00
-bash: /home/amirali/.bashrc: line 12: unexpected EOF while looking for matching `"'
-bash: /home/amirali/.bashrc: line 20: syntax error: unexpected end of file
-bash-4.4$ grep "replied_to" downloaded_tweets_extend_original_nolf2_NOBOT.tsv | cut -f 2,6  | sort -k  2 -n | awk ' { t = $1; $1 = $2; $2 = t; print; } '> sub_set_graph.tsv
+
+bash-4.4$ grep "replied_to" downloaded_tweets_extend_original_nolf2_NOBOT.tsv | cut -f 2,6  | sort -k 
+ 2 -n | awk ' { t = $1; $1 = $2; $2 = t; print; } '> sub_set_graph.tsv
 bash-4.4$ head sub_set_graph.tsv
 3832 1412897313907900420
 3832 246667561
@@ -28,7 +28,8 @@ using the command professor provided for the previous assignment.
 Script started on 2022-10-07 17:33:03-04:00
 bash: /home/amirali/.bashrc: line 12: unexpected EOF while looking for matching `"'
 bash: /home/amirali/.bashrc: line 20: syntax error: unexpected end of file
-bash-4.4$ grep "replied_to" downloaded_tweets_extend_original_nolf2_NOBOT.tsv | cut -f 2,6  | sort -k 2 -n | awk ' { t = $1; $1 = $2; $2 = t; print; } '> sub_set_graph.ttsv
+bash-4.4$ grep "replied_to" downloaded_tweets_extend_original_nolf2_NOBOT.tsv | cut -f 2,6  | sort -k 2 -n | awk ' { t = $1; $1 = $2; $2 = t; print; } '> sub_set_graph.t
+tsv
 bash-4.4$ awk '{print $1}' sub_set_graph.tsv| sort | uniq -c | sort -nr | awk '{ if ($1 >= 3) {print} }'
      45 3453306553
      27 29447428
@@ -148,7 +149,7 @@ bash-4.4$ exit
 Script done on 2022-10-07 17:34:18-04:00
 
 *********************************************************************************************************************
-
+3. These are the commands used to obtain the histogram value
 
 reset
 n=100 #number of intervals
@@ -173,9 +174,13 @@ plot "histogram.dat" u (hist($1,width)):(1.0) smooth freq w boxes lc rgb"green" 
 
 These are the commands I used to plot the histogram. I used the script provided
 by the professor in stack exchange. 
+
+
+**************************************************************************************************************************
+**************************************************************************************************************************
+4. 
 Script started on 2022-10-06 17:34:48-04:00
-bash: /home/amirali/.bashrc: line 12: unexpected EOF while looking for matching `"'
-bash: /home/amirali/.bashrc: line 20: syntax error: unexpected end of file
+
 bash-4.4$ grep "replied_to" downloaded_tweets_extend_original_nolf2_NOBOT.tsv | cut -f 4,6  | awk ' { t = $1; $1 = $2; $2 = t; print; }'   > hashtags.tsv
 bash-4.4$ awk '{print $2}' hashtags.tsv |tr "," "\n"  | tr [:upper:] [:lower:]| tr -d ' ' | tr -d '\"' |tr -d '"\'|  sort | uniq -c | sort -nr | head -n 30
 tr: warning: an unescaped backslash at end of string is not portable
@@ -219,13 +224,11 @@ results as the second question of this assignment.
 
 
 Now to compare these hashtags with the most common hastags of the whole dataset there are several differences. #longcovid is a very popular hashtag used in 
-both clusters. #ukrain is used less in this cluster. a diff command wil be ran to compare the major differences below. As you can see below , using 
+both clusters. #ukraine is used less in this cluster. a diff command wil be ran to compare the major differences below. As you can see below , using 
 the diff command there are no common amount of hashtags, however, there are relatively similar hashtags throughout the file. 
   
 
 Script started on 2022-10-07 14:22:27-04:00
-bash: /home/amirali/.bashrc: line 12: unexpected EOF while looking for matching `"'
-bash: /home/amirali/.bashrc: line 20: syntax error: unexpected end of file
 bash-4.4$ diff -u commonhashtags.tsv clusterhashtags.tsv 
 --- commonhashtags.tsv	2022-10-07 14:17:58.200020243 -0400
 +++ clusterhashtags.tsv	2022-10-07 14:18:33.150157710 -0400
